@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Navigation Bar</title>
+</head>
+<body style="background: #fafafa;">
+    <nav class="navbar1">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+        </div>
+        <a class="new-link" id="newLink">Add new</a>
+        <a class="new-link" id="loginLink" href="https://kreeke.com/myflixer/index.php">Movies</a>
+        <div class="input-overlay" id="inputOverlay">
+            <div class="input-container">
+                <span id="closeButton" class="close-icon" onclick="closeInputOverlay()">
+                    <i class="fa fa-close" style="font-size:25px;color:#A4D433"></i>
+                </span>
+                <input type="text" id="userInput" name="url" placeholder="Enter tv show url">
+                <button id="submitButton">Get</button>
+                <span id="scrapingText" style="display: none;">Scraping...</span> <!-- Add this line -->
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    </nav>
+    
+    <h2 align="center" style="font-size: 40px;color:#111;margin-top:20px;font-weight:bold;"><span style="color:#90bb2d;">FLIXHQ</span> API</h2>
+
+    <div class="table-container">
+        <table class="modern-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Poster</th>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Episodes</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            {% if scraped_data %}
+                <tbody>
+                    {% for entry in scraped_data %}
+                    <tr>
+                        <td>{{ entry.id }}</td>
+                        <td><img src="{{ entry.poster }}" alt="Poster" width="70px" height="105px"></td>
+                        <td>{{ entry.title }}</td>
+                        <td>{{ entry.year }}</td>
+                        <td>
+                            <select class="season-dropdown"  onchange="updateEpisodeDropdown({{ entry.episodes }})">
+                                <option value="" selected disabled>Select Season</option>
+                                {% for season in entry.episodes %}
+                                    <option value="{{ loop.index0 }}">Season {{ season.Season }}</option>
+                                {% endfor %}
+                            </select>
+                            <select class="episode-dropdown" >
+                                <option value="" selected disabled>Select Episode</option>
+                            </select>
+                            <button class="copy-button1" onclick="showEpisodeLinks({{ entry.episodes}})">Get Links</button>
+                            <div class="link-list">
+                                <!-- Links will be populated here -->
+                            </div>
+                        </td>
+                        <td>
+                            <form action="{{ entry.delete_url }}" method="POST">
+                                <button type="submit" class="delete">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    
+                    {% else %}
+                    <tr>
+                        <td colspan="5">No data available.</td>
+                    </tr>
+                </tbody>
+            {% endif %}
+        </table>
+        
+    </div>
+
+    </div>
+    <script>
+        
+        function updateEpisodeDropdown(episodesData) {
+            var seasonDropdown = event.target;
+            var episodeDropdown = seasonDropdown.nextElementSibling;
+            
+            episodeDropdown.innerHTML = '';
+    
+            var selectedSeasonIndex = seasonDropdown.value;
+            var selectedSeasonData = episodesData[selectedSeasonIndex];
+            var selectedEpisodes = selectedSeasonData.Episodes; 
+            var defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.text = 'Select Episode';
+            episodeDropdown.appendChild(defaultOption);
+    
+            for (var i = 0; i < selectedEpisodes.length; i++) {
+                var episodeNumber = selectedEpisodes[i].Episode;
+                var option = document.createElement('option');
+                option.value = i;
+                option.text = 'Episode ' + episodeNumber;
+                episodeDropdown.appendChild(option);
+            }
+        }
+    
+        function showEpisodeLinks( episodesDataJSON) {
+            var seasonDropdown = event.target.previousElementSibling.previousElementSibling;
+            var episodeDropdown = event.target.previousElementSibling;
+            var linksOverlay = event.target.nextElementSibling;
+            var linkList = event.target.parentElement.querySelector('.link-list'); // Find the link-list element
+            var selectedSeasonIndex = seasonDropdown.value;
+            var selectedEpisodeIndex = episodeDropdown.value;
+            var episodesData = JSON.parse(JSON.stringify(episodesDataJSON));
+            var selectedSeasonData = episodesData[selectedSeasonIndex];
+            var selectedEpisodes = selectedSeasonData.Episodes[selectedEpisodeIndex];
+                // Clear the existing content in the popup
+
+        // Create and append div elements for each URL
+            linkList.innerHTML = '';
+
+// Create and append anchor elements for each URL
+            var serverNames = ['Server 1', 'Server 2', 'Server 3'];
+
+            selectedEpisodes.URLs.forEach(function(url, index) {
+                var linkContainer = document.createElement('div');
+                linkContainer.className = 'link-container';
+
+                var serverInfo = document.createElement('div');
+                serverInfo.className = 'server-info';
+                serverInfo.textContent = serverNames[index];
+                linkContainer.appendChild(serverInfo);
+
+                var linkWithButton = document.createElement('div');
+                linkWithButton.className = 'link-with-button';
+
+                var copyButton = document.createElement('button');
+                copyButton.className = 'copy-button';
+                copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share-fill" viewBox="0 0 16 16"><path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/></svg><span>Copy</span>';
+                copyButton.addEventListener('click', function() {
+                    var icon = copyButton.querySelector('svg');
+                    var textSpan = copyButton.querySelector('span');
+                    navigator.clipboard.writeText(url).then(function() {
+                        console.log('Link copied to clipboard:', url);
+                        icon.style.opacity = '0';
+                        textSpan.textContent = 'Copied';
+                        setTimeout(function() {
+                            icon.style.opacity = '1';
+                            textSpan.textContent = 'Copy';
+                        }, 1000);
+                    });
+                });
+                linkWithButton.appendChild(copyButton);
+
+                linkContainer.appendChild(linkWithButton);
+
+                linkList.appendChild(linkContainer);
+                linkList.appendChild(document.createElement('br'));
+            });
+        }
+
+    </script>
+</body>
+
+</html>	

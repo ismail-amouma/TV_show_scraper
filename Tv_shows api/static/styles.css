@@ -1,0 +1,247 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.navbar1 {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.logo img {
+    max-width: 100px;
+    height: auto;
+    margin-right: 60px ;
+    margin-left: 80px;
+}
+
+.new-link {
+    font-size: 16px;
+    cursor: pointer;
+    color: #A4D433;
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease;
+    margin-right:30px ;
+}
+
+.new-link:hover {
+    color: #7DA027;
+}
+
+.input-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    
+}
+.close-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    opacity: 1; 
+    transition: opacity 0.3s ease, transform 0.3s ease; 
+    transform-origin: center center; 
+}
+
+.close-icon:hover {
+    opacity: 0.75; 
+    transform: scale(0.75); 
+}
+
+.input-container {
+    position: relative;
+    width: 400px;
+    margin: 150px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+input[type="text"] {
+    
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin:25px auto;
+    display:block;
+    box-sizing:border-box;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+button#submitButton {
+    background-color: #A4D433;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    margin: 0 auto;
+    display:block;
+    box-sizing:border-box;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button#submitButton:hover {
+    background-color: #7DA027;
+}
+.table-container {
+    margin: 20px;
+}
+
+.modern-table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+}
+
+.modern-table th,
+.modern-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.modern-table th {
+    background-color: #90bb2d;
+    
+}
+
+.modern-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+    color: #000000;
+}
+.modern-table tbody tr:nth-child(even) {
+    background-color: #90bb2d;
+    color: #ffffff;
+}
+
+
+
+.link-list{
+    flex-direction: row;
+    align-items: center;
+    margin: 0 auto;
+    display: flex;
+}
+
+.link-container{
+    margin-top:10px;
+    margin:0 auto;
+
+}
+
+
+.server-container {
+    display: flex;
+    flex-direction: column; /* Display items vertically */
+    align-items: flex-end; /* Align items to the right */
+    margin-bottom: 10px; /* Adjust spacing between pairs */
+}
+
+.server-info {
+    font-weight: bold;
+    color: #555;
+    text-align: right; /* Align server info to the right */
+}
+
+.copy-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+.copy-button:hover {
+    background-color: #003f83;
+}
+.copy-button1 {
+    margin:10px auto;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-top: 10px;
+}
+.copy-button1:hover {
+    background-color: #003f83;
+}
+
+
+.copy-button svg {
+    width: 1em;
+    height: 1em;
+    margin-right: 5px;
+    transition: opacity 0.3s ease;
+}
+
+.copy-button.copied svg {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+select {
+    
+    appearance: none;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #495057;
+    cursor: pointer;
+}
+
+/* Style for the dropdown arrow */
+select::-ms-expand {
+    display: none;
+}
+
+/* Style for the option elements */
+option {
+    background-color: white;
+    color: #333;
+}
+
+/* Adjust spacing between the dropdowns */
+select + select {
+    margin-left: 10px;
+}
+
+
+
+
+
+.delete {
+    background-color: #fa4040;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+.delete:hover {
+    background-color: #ff1c1c;
+}
