@@ -73,9 +73,6 @@ You also need to have the Chrome WebDriver installed for Selenium. Download it f
 
 Contributions are welcome! If you have suggestions or improvements, feel free to submit a pull request.
 
-
----
-
 *Disclaimer: This project is for educational purposes only. Please ensure that you adhere to the terms of use and policies of any websites you interact with through this application.*
-```
+
 
