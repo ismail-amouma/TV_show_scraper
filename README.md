@@ -25,7 +25,7 @@ You also need to have the Chrome WebDriver installed for Selenium. Download it f
 
    ```bash
    git clone https://github.com/ismail-amouma/TV_show_scraper.git
-   cd your-repo
+   cd TV_show_scraper
    ```
 
 2. Install the required dependencies:
