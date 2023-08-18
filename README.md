@@ -1,9 +1,9 @@
 
-# TV Show Scraper and Fla
+# TV Show Scraper and Flask App
+
 
 https://github.com/ismail-amouma/TV_show_scraper/assets/91847466/688846cb-ddc9-4a90-a1af-72d18c9e0ce2
 
-sk App
 
 This project is a Python application that combines web scraping using Selenium with a Flask web application to display and manage scraped data from a streaming website. The primary focus of this project is to scrape information about TV shows that you can watch online. The scraped data includes details about TV show episodes and their corresponding streaming links.
 
