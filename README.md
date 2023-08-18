@@ -27,29 +27,22 @@ You also need to have the Chrome WebDriver installed for Selenium. Download it f
 2. Install the required dependencies:
 
    ```bash
-   pip install 
-   ```
-
-3. Initialize the database migrations:
-
-   ```bash
    flask db init Flask,Flask-SQLAlchemy,Flask-Migrate,selenium
    ```
-
-4. Run the migration to set up the database:
+3. Run the migration to set up the database:
 
    ```bash
    flask db migrate -m "Initial migration"
    flask db upgrade
    ```
 
-5. Run the Flask app:
+4. Run the Flask app:
 
    ```bash
    python app.py
    ```
 
-6. Access the app in your web browser at `http://127.0.0.1:5000/`.
+5. Access the app in your web browser at `http://127.0.0.1:5000/`.
 
 ## Features
 
